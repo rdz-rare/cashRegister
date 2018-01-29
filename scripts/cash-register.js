@@ -112,7 +112,6 @@ var cashRegister = (function () {
     function getTotalCashFlow() {
         var _total = 0;
         for (var i = 0; i < denominations.length; i++) {
-            // console.log('getTotalCashFlow', denominations[i].amount * denominations[i].qty);
             _total += (denominations[i].amount * denominations[i].qty);
         }
         return _total;
