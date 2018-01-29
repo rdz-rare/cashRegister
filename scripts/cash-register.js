@@ -54,7 +54,7 @@ var cashRegister = (function () {
     ];
 
     var initialBalance = getTotalCashFlow();
-    var totalSold = 0;
+    var totalSales = 0;
 
 
     // Calculate the change due
@@ -75,7 +75,7 @@ var cashRegister = (function () {
             return { message: 'Not enough cash', success: false}
             // If the price is equal to cash then return 0 remainer;
         } else if (price == cash) {
-            sold(price);
+            addSale(price);
             return { message: 'Your change: ' + _remainer, success: true};
 
             // Process the remainer money
@@ -108,7 +108,7 @@ var cashRegister = (function () {
 
         if (_remainerValue == 0) {
             denominations = _tempDenominations.reverse();
-            sold(price);
+            addSale(price);
         }
         return _remainerValue;
     }
@@ -123,15 +123,19 @@ var cashRegister = (function () {
         return _total;
     };
 
-    function sold(cash) {
-       totalSold += cash;
-       console.log('sold:', totalSold);
-       return totalSold;
+    var addSale = function(cash) {
+       totalSales += cash;
+       console.log('sales:', totalSales);
+       return totalSales;
     }
 
-    // function square(){
+    function getSquare(){
+        return parseFloat(totalSales + initialBalance).toFixed(2);
+    }
 
-    // }
+    function getSales(){
+        return totalSales;
+    }
 
 
     // Get Denominations
@@ -147,7 +151,8 @@ var cashRegister = (function () {
     return {
         initialBalance: initialBalance,
         getTotalCashFlow: getTotalCashFlow,
-        sold: sold,
+        getSales: getSales,
+        getSquare: getSquare,
         getDenominations: getDenominations,
         calculateChangeDue: calculateChangeDue
     }

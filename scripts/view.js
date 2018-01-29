@@ -22,13 +22,14 @@ $(document).ready(function () {
     
     function refreshDenominations(){
         denominations = cashRegister.getDenominations();
+        printSquare();
 
         $('#table-denominations tbody').html('');
         $.each(denominations, function(index, item){
         
             $('#table-denominations tbody').append(`
                 <tr>
-                    <th scope="row">${item.name}</th>
+                    <td scope="row">${item.name}</th>
                     <td>$${item.amount}</td>
                     <td>${item.qty}</td>
                 </tr>
@@ -39,19 +40,45 @@ $(document).ready(function () {
                 <tr>
                     <th scope="row">INITIAL BALANCE</th>
                     <td></td>
-                    <td>${cashRegister.initialBalance}</td>
+                    <th>$${cashRegister.initialBalance}</td>
                 </tr>
             `);
 
     };
 
+    function printSquare(){
+        $('#table-square tbody').html(
+        `<tr>
+            <td>Initial Balance</td>
+            <td>$${cashRegister.initialBalance}</td>
+        </tr>
+        <tr>
+            <td>Sold</td>
+            <td>$${cashRegister.getSales()}</td>
+        </tr>
+        <tr>
+            <th>Total Amount</td>
+            <th>$${cashRegister.getSquare()}</td>
+        </tr>`
+        );
+    }
+
     function printMessage(message){
+        $message.hide();
+
         if (message.success){
-            console.log('message 1', message);
-            $message.addClass('alert-success').removeClass('alert-warning').text(message.message).show();
+            $message.addClass('alert-success').removeClass('alert-warning').fadeIn().html(`
+                <strong>Closed</strong> 
+                ${message.message}
+            `);
+            setTimeout(function(){
+                $message.fadeOut();
+            },3000)
         }else{
-            console.log('message 2', message);
-            $message.addClass('alert-warning').removeClass('alert-success').text(message.message).show();
+            $message.addClass('alert-warning').removeClass('alert-success').fadeIn().html(message.message);
+            setTimeout(function () {
+                $message.fadeOut();
+            }, 3000)
         }
     }
     
@@ -65,5 +92,5 @@ $(document).ready(function () {
     })
 
     refreshDenominations();
-    $message.hide();
+    $message.fadeOut();
 });
