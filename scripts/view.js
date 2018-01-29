@@ -1,28 +1,20 @@
-var $ = require('jquery');
-var cashRegister = require('./cash-register.js');
-
-var denominations;
-
-// console.log('total: ' + cashRegister.getTotalCashFlow());
-// console.log('totalCash: ' + cashRegister.getTotalCashFlow());
-// console.log('calculateChangeDue: ' + message.message);
-// var message = cashRegister.calculateChangeDue(24.25, 30)
+var $ = require('jquery'),
+    cashRegister = require('./cash-register.js'),
+    denominations;
 
 
 $(document).ready(function () {
 
-    console.log('denominations', denominations);
-    
     $formRegister = $('#form-register');
     $priceInput = $('#form-register-price');
     $cashInput = $('#form-register-cash');
     $message = $('#message');
-    console.log('$$priceInput', $priceInput.val());
-    
+    $btnGetSquare = $('#btn-get-square');
+    $tableSquareContainer = $('#table-square-container');
+    $tableSquare = $('#table-square');
     
     function refreshDenominations(){
         denominations = cashRegister.getDenominations();
-        printSquare();
 
         $('#table-denominations tbody').html('');
         $.each(denominations, function(index, item){
@@ -37,30 +29,31 @@ $(document).ready(function () {
         })
 
         $('#table-denominations tbody').append(`
-                <tr>
-                    <th scope="row">INITIAL BALANCE</th>
-                    <td></td>
-                    <th>$${cashRegister.initialBalance}</td>
-                </tr>
-            `);
-
+            <tr>
+                <th scope="row">INITIAL BALANCE</th>
+                <td></td>
+                <th>$${cashRegister.initialBalance}</td>
+            </tr>
+        `);
     };
 
     function printSquare(){
-        $('#table-square tbody').html(
-        `<tr>
-            <td>Initial Balance</td>
-            <td>$${cashRegister.initialBalance}</td>
-        </tr>
-        <tr>
-            <td>Sold</td>
-            <td>$${cashRegister.getSales()}</td>
-        </tr>
-        <tr>
-            <th>Total Amount</td>
-            <th>$${cashRegister.getSquare()}</td>
-        </tr>`
-        );
+        $tableSquareContainer.show();
+        $formRegister.hide();
+        $tableSquare.find('tbody').html(`
+            <tr>
+                <td>Initial Balance</td>
+                <td>$${cashRegister.initialBalance}</td>
+            </tr>
+            <tr>
+                <td>Sold</td>
+                <td>$${cashRegister.getSales()}</td>
+            </tr>
+            <tr>
+                <th>Total Amount</td>
+                <th>$${cashRegister.getSquare()}</td>
+            </tr>
+        `);
     }
 
     function printMessage(message){
@@ -81,16 +74,22 @@ $(document).ready(function () {
             }, 3000)
         }
     }
-    
+
+
+    // Events
     $formRegister.submit(function(e){
         e.preventDefault();
         var response = cashRegister.calculateChangeDue($priceInput.val(), $cashInput.val());
         refreshDenominations();
         printMessage(response);
-        console.log('messages---', response.message);
-        // alert(message.message);
+    })
+
+    $btnGetSquare.click(function(){
+        $(this).parent().hide();
+        printSquare();
     })
 
     refreshDenominations();
     $message.fadeOut();
+    $tableSquareContainer.hide();
 });
