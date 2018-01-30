@@ -1,6 +1,8 @@
 ## 1. Cash Register
 ![cash register](https://d.pr/i/1SKtsR+ "Logo Title Text 1")
 
+[Go to app](http://cash-register-gft.herokuapp.com/)
+
 Design a CashRegister  that allows you to make payment by passing “price”, “cash” and then calculates if the change due is available, if the amount is available then return “Change Due: $1.01” if it does not have sufficient cash then return “Insufficient Funds” and after paid is trigger then it returns “Closed”. Also you should be able to call square at the end of day, initial cash + sold amount it should equal totalAmount available. 
 
 **Note remember the cash register should know how many of each amount it contains, and it could use combinations of each to give you the change.**
@@ -13,6 +15,7 @@ It always has all 9 denominations, even when they are 0.
 
 
 ## 2. Pairwise
+![cash register](https://d.pr/i/enMN2k+ "Logo Title Text 1")
 Given an array arr, find element pairs whose sum equal the second argument arg and return the sum of their indices.
 
 If multiple pairs are possible that have the same numeric elements but different indices, return the smallest sum of indices. Once an element has been used, it cannot be reused to pair with another.
