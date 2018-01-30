@@ -1,7 +1,7 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: './scripts/main.js',
+    entry: './scripts/view.js',
     output: {
         path: __dirname,
         filename: './scripts/main.min.js'

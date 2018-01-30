@@ -59,10 +59,11 @@ var cashRegister = (function () {
 
     // Calculate the change due
     function calculateChangeDue(price, cash) {
+        price = Number(price);
+        cash = Number(cash);
+        
         var _totalCashFlow = getTotalCashFlow(),
-            _remainer = parseFloat(cash - price).toFixed(2),
-            price = Number(price),
-            cash = Number(cash);
+            _remainer = parseFloat(cash - price).toFixed(2);
 
         // If the price es greater than the total cash flow or the prices is greater the cash then return: Insufficient Funds
         if (price > _totalCashFlow) {

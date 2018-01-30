@@ -6,6 +6,7 @@ var $ = require('jquery'),
 
 $(document).ready(function () {
 
+    // Cash Register
     $formRegister = $('#form-register');
     $priceInput = $('#form-register-price');
     $cashInput = $('#form-register-cash');
@@ -13,6 +14,12 @@ $(document).ready(function () {
     $btnGetSquare = $('#btn-get-square');
     $tableSquareContainer = $('#table-square-container');
     $tableSquare = $('#table-square');
+    // PairWise
+    $pwForm = $('#form-pw');
+    $pwArrInput = $('#input-pw-arr');
+    $pwArgInput = $('#input-pw-arg');
+    $pwRespElem = $('#pw-response');
+
     
     function refreshDenominations(){
         denominations = cashRegister.getDenominations();
@@ -61,21 +68,15 @@ $(document).ready(function () {
         $message.hide();
 
         if (message.success){
-            $message.addClass('alert-success').removeClass('alert-warning').fadeIn().html(`
+            $message.addClass('alert-success').removeClass('alert-warning').hide().fadeIn()
+            .html(`
                 <strong>Closed</strong> 
                 ${message.message}
             `);
-            setTimeout(function(){
-                $message.fadeOut();
-            },3000)
         }else{
-            $message.addClass('alert-warning').removeClass('alert-success').fadeIn().html(message.message);
-            setTimeout(function () {
-                $message.fadeOut();
-            }, 3000)
+            $message.addClass('alert-warning').removeClass('alert-success').hide().fadeIn().html(message.message);
         }
     }
-
 
     /**
      * EVENTS
@@ -95,7 +96,14 @@ $(document).ready(function () {
         printSquare();
     });
 
+    $pwForm.submit(function(e){
+        e.preventDefault();
+        var sum = pw($pwArrInput.val(), $pwArgInput.val());
+        $pwRespElem.hide().text(sum).fadeIn();
+    })
+
     refreshDenominations();
-    $message.fadeOut();
+    $message.hide();
+    $pwRespElem.hide();
     $tableSquareContainer.hide();
 });

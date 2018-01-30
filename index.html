@@ -62,10 +62,28 @@
                 
             </div>
         </div>
-
-        <div class="row row justify-content-center mt-5">
+        <!-- PAIRWISE -->
+        <div class="row row justify-content-center mt-5 mb-5">
             <div class="col-sm-12 col-lg-11">
-                <h2 class="text-secondary">Pairwise</h2>
+                <h2 class="text-secondary">Pairwise <span class="text-white" id="pw-response"></span></h2>
+            </div>
+            <div class="col-sm-12 col-lg-11">
+                <form id="form-pw">
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="input-pw-arr">Enter an array</label>
+                            <input type="text" class="form-control" id="input-pw-arr" placeholder="[1,2,3]" required>
+                        </div>
+                        <div class="col">
+                            <label for="input-pw-arg">Enter a number</label>
+                            <input type="text" class="form-control" id="input-pw-arg" placeholder="4" required>
+                        </div>
+                        <div class="col col-xs-12 mt-3 pt-3">
+                            <button type="submit" class="btn btn-primary">Process</button>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
