@@ -20,13 +20,13 @@ $(document).ready(function () {
     $pwArgInput = $('#input-pw-arg');
     $pwRespElem = $('#pw-response');
 
-    
-    function refreshDenominations(){
+
+    function refreshDenominations() {
         denominations = cashRegister.getDenominations();
 
         $('#table-denominations tbody').html('');
-        $.each(denominations, function(index, item){
-        
+        $.each(denominations, function (index, item) {
+
             $('#table-denominations tbody').append(`
                 <tr>
                     <td scope="row">${item.name}</th>
@@ -45,7 +45,7 @@ $(document).ready(function () {
         `);
     };
 
-    function printSquare(){
+    function printSquare() {
         $tableSquareContainer.show();
         $formRegister.hide();
         $tableSquare.find('tbody').html(`
@@ -64,16 +64,16 @@ $(document).ready(function () {
         `);
     }
 
-    function printMessage(message){
+    function printMessage(message) {
         $message.hide();
 
-        if (message.success){
+        if (message.success) {
             $message.addClass('alert-success').removeClass('alert-warning').hide().fadeIn()
-            .html(`
+                .html(`
                 <strong>Closed</strong> 
                 ${message.message}
             `);
-        }else{
+        } else {
             $message.addClass('alert-warning').removeClass('alert-success').hide().fadeIn().html(message.message);
         }
     }
@@ -83,7 +83,7 @@ $(document).ready(function () {
      */
 
     // Form Register (submit)
-    $formRegister.submit(function(e){
+    $formRegister.submit(function (e) {
         e.preventDefault();
         var response = cashRegister.calculateChangeDue($priceInput.val(), $cashInput.val());
         refreshDenominations();
@@ -91,12 +91,12 @@ $(document).ready(function () {
     });
 
     // Button Get Square (click)
-    $btnGetSquare.click(function(){
+    $btnGetSquare.click(function () {
         $(this).parent().hide();
         printSquare();
     });
 
-    $pwForm.submit(function(e){
+    $pwForm.submit(function (e) {
         e.preventDefault();
         var sum = pw($pwArrInput.val(), $pwArgInput.val());
         $pwRespElem.hide().text(sum).fadeIn();

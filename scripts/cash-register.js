@@ -61,26 +61,26 @@ var cashRegister = (function () {
     function calculateChangeDue(price, cash) {
         price = Number(price);
         cash = Number(cash);
-        
+
         var _totalCashFlow = getTotalCashFlow(),
             _remainer = parseFloat(cash - price).toFixed(2);
 
         // If the price es greater than the total cash flow or the prices is greater the cash then return: Insufficient Funds
         if (price > _totalCashFlow) {
-            return {message: 'Insufficient Funds', success: false };
+            return { message: 'Insufficient Funds', success: false };
 
         } else if (price > cash) {
-            return { message: 'Not enough cash', success: false};
+            return { message: 'Not enough cash', success: false };
             // If the price is equal to cash then return 0 remainer;
         } else if (price == cash) {
             _addSale(price);
-            return { message: 'Change Due: ' + _remainer, success: true};
+            return { message: 'Change Due: ' + _remainer, success: true };
 
-        // Process the remainer money
+            // Process the remainer money
         } else {
-            if(_testChangeDue(_remainer, price) == 0){
+            if (_testChangeDue(_remainer, price) == 0) {
                 return { message: 'Change Due: $' + _remainer, success: true };
-            }else{
+            } else {
                 return { message: 'Insufficient Funds', success: false };
             }
         }
@@ -118,16 +118,16 @@ var cashRegister = (function () {
         return _total;
     }
 
-    var _addSale = function(cash) {
+    var _addSale = function (cash) {
         _totalSales += cash;
         return _totalSales;
     };
 
-    function getSquare(){
+    function getSquare() {
         return parseFloat(_totalSales + initialBalance).toFixed(2);
     }
 
-    function getSales(){
+    function getSales() {
         return parseFloat(_totalSales).toFixed(2);
     }
 
