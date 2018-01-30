@@ -1,5 +1,6 @@
 var $ = require('jquery'),
     cashRegister = require('./cash-register.js'),
+    pw = require('./p-w.js'),
     denominations;
 
 
@@ -26,7 +27,7 @@ $(document).ready(function () {
                     <td>${item.qty}</td>
                 </tr>
             `);
-        })
+        });
 
         $('#table-denominations tbody').append(`
             <tr>
@@ -76,18 +77,23 @@ $(document).ready(function () {
     }
 
 
-    // Events
+    /**
+     * EVENTS
+     */
+
+    // Form Register (submit)
     $formRegister.submit(function(e){
         e.preventDefault();
         var response = cashRegister.calculateChangeDue($priceInput.val(), $cashInput.val());
         refreshDenominations();
         printMessage(response);
-    })
+    });
 
+    // Button Get Square (click)
     $btnGetSquare.click(function(){
         $(this).parent().hide();
         printSquare();
-    })
+    });
 
     refreshDenominations();
     $message.fadeOut();

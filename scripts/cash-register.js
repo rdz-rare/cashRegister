@@ -60,8 +60,8 @@ var cashRegister = (function () {
     // Calculate the change due
     function calculateChangeDue(price, cash) {
         var _totalCashFlow = getTotalCashFlow(),
-            _remainer = parseFloat(cash - price).toFixed(2);
-            price = Number(price);
+            _remainer = parseFloat(cash - price).toFixed(2),
+            price = Number(price),
             cash = Number(cash);
 
         // If the price es greater than the total cash flow or the prices is greater the cash then return: Insufficient Funds
@@ -69,7 +69,7 @@ var cashRegister = (function () {
             return {message: 'Insufficient Funds', success: false };
 
         } else if (price > cash) {
-            return { message: 'Not enough cash', success: false}
+            return { message: 'Not enough cash', success: false};
             // If the price is equal to cash then return 0 remainer;
         } else if (price == cash) {
             _addSale(price);
@@ -77,11 +77,11 @@ var cashRegister = (function () {
 
         // Process the remainer money
         } else {
-           if(_testChangeDue(_remainer, price) == 0){
-               return { message: 'Change Due: $' + _remainer, success: true };
-           }else{
-               return { message: 'Insufficient Funds', success: false };
-           }
+            if(_testChangeDue(_remainer, price) == 0){
+                return { message: 'Change Due: $' + _remainer, success: true };
+            }else{
+                return { message: 'Insufficient Funds', success: false };
+            }
         }
     }
 
@@ -106,7 +106,7 @@ var cashRegister = (function () {
             _addSale(price);
         }
         return _remainerValue;
-    }
+    };
 
     // Get the total cash in the register counter
     function getTotalCashFlow() {
@@ -115,12 +115,12 @@ var cashRegister = (function () {
             _total += (denominations[i].amount * denominations[i].qty);
         }
         return _total;
-    };
+    }
 
     var _addSale = function(cash) {
-       _totalSales += cash;
-       return _totalSales;
-    }
+        _totalSales += cash;
+        return _totalSales;
+    };
 
     function getSquare(){
         return parseFloat(_totalSales + initialBalance).toFixed(2);
@@ -142,7 +142,7 @@ var cashRegister = (function () {
         getSquare: getSquare,
         getDenominations: getDenominations,
         calculateChangeDue: calculateChangeDue
-    }
+    };
 })();
 
 module.exports = cashRegister;
